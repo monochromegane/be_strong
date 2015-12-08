@@ -4,6 +4,7 @@ module BeStrong
       model = name.to_s.classify.constantize
       permits = model.accessible_attributes.map{|attr| ":#{attr}"}.join(', ')
       permit_method = permits.present? ? ".permit(#{permits})" : ''
+
       <<-"EOS".strip_heredoc
         def #{name}_params
           params.require(:#{name})#{permit_method}
