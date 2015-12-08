@@ -74,6 +74,74 @@ describe BeStrong::Code do
     end
   end
 
+  describe '#remove_attr_accessible!' do
+    subject { described_class.new(code).remove_attr_accessible! }
+
+    shared_examples_for 'code should not have attr_accessible' do
+      it do
+        is_expected.to eq(<<-'EOS'.strip_heredoc)
+        class Hoge
+
+        end
+        EOS
+      end
+    end
+
+    context 'when code has attr_accessible with one line' do
+      let(:code) do
+        <<-'EOS'.strip_heredoc
+        class Hoge
+          attr_accessible :hoge, :fuga
+        end
+        EOS
+      end
+
+      it_behaves_like 'code should not have attr_accessible'
+
+      context 'with ()' do
+        let(:code) do
+          <<-'EOS'.strip_heredoc
+          class Hoge
+            attr_accessible(:hoge, :fuga)
+          end
+          EOS
+        end
+
+        it_behaves_like 'code should not have attr_accessible'
+      end
+    end
+
+    context 'when code has attr_accessible with multi line' do
+      let(:code) do
+        <<-'EOS'.strip_heredoc
+        class Hoge
+          attr_accessible :hoge,
+                          :fuga,
+                          :piyo
+        end
+        EOS
+      end
+
+      it_behaves_like 'code should not have attr_accessible'
+
+      context 'with ()' do
+        let(:code) do
+          <<-'EOS'.strip_heredoc
+          class Hoge
+            attr_accessible(
+              :hoge,
+              :fuga,
+              :piyo
+            )
+          end
+          EOS
+        end
+
+        it_behaves_like 'code should not have attr_accessible'
+      end
+    end
+  end
+
   describe '#add_private!' do
     subject { described_class.new(code).add_private! }
 

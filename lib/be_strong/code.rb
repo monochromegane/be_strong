@@ -31,7 +31,7 @@ module BeStrong
         end
       end
 
-      return code
+      code
     end
 
     def add_private!
@@ -42,6 +42,12 @@ module BeStrong
           "\n  private\nend"
         end
       end
+    end
+
+    def remove_attr_accessible!
+      code.gsub!(/( *attr_accessible\(.*?\)$)/m, '')
+      code.gsub!(/( *attr_accessible.+?[^,]$)/m, '')
+      code
     end
 
     private
