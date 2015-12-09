@@ -3,7 +3,7 @@ module BeStrong
     class << self
       def apply_all(dir)
         files = []
-        Dir.glob(File.join(path, '**/*.rb')).each do |file|
+        Dir.glob(File.join(dir, '**/*.rb')).each do |file|
           applied = apply(file)
           files << file if applied
         end
