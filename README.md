@@ -1,8 +1,54 @@
 # BeStrong
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/be_strong`. To experiment with that code, run `bin/console` for an interactive prompt.
+BeStrong is a tool for converting your `attr_accessible` and `attr_protected` to **strong parameter** method.
 
-TODO: Delete this and the text above, and describe your gem
+## Examples
+
+If your code isn't strong like the following:
+
+```rb
+# Model
+class Author < ActiveRecord::Base
+  attr_accessible :name, :age
+end
+
+# Controller
+class AuthorsController < ApplicationController
+  def create
+    Author.new(params[:author])
+    ...
+  end
+end
+```
+
+After run `be_strong` command:
+
+```rb
+# Strong Model
+class Author < ActiveRecord::Base
+end
+
+# Strong Controller
+class AuthorsController < ApplicationController
+  def create
+    Author.new(author_params)
+    ...
+  end
+
+  private
+
+  def author_params
+    params.require(:author).permit(:name, :age)
+  end
+end
+```
+
+## Feature
+
+- Generate strong parameter method from model.
+- Apply strong parameter method to controller.
+- Remove attr_accessible method from model.
+- Remove attr_protected method from model.
 
 ## Installation
 
@@ -12,17 +58,12 @@ Add this line to your application's Gemfile:
 gem 'be_strong'
 ```
 
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install be_strong
-
 ## Usage
 
-TODO: Write usage instructions here
+```sh
+$ cd your-project
+$ be_strong
+```
 
 ## Development
 
@@ -32,7 +73,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/be_strong. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/monochromegane/be_strong. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
 
 
 ## License
