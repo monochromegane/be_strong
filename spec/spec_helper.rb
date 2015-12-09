@@ -5,6 +5,6 @@ require File.join(File.dirname(__FILE__), "dummy_app.rb")
 
 RSpec.configure do |config|
   config.before :all do
-    CreateAuthors.up if !ActiveRecord::Base.connection.table_exists?('authors')
+    CreateTables.up if !ActiveRecord::Base.connection.table_exists?('authors')
   end
 end

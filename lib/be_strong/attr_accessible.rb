@@ -12,7 +12,7 @@ module BeStrong
 
       def remove(file)
         buf  = File.open(file, 'r'){|f| f.read}
-        code = Code.new(buf).remove_attr_accessible!
+        code = Code.new(buf).remove_attr_accessible_and_protected!
         return false unless code.changed?
 
         File.open(file, 'w'){|f| f.puts(code.to_str)}

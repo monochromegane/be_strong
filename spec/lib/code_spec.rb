@@ -74,8 +74,8 @@ describe BeStrong::Code do
     end
   end
 
-  describe '#remove_attr_accessible!' do
-    subject { described_class.new(code).remove_attr_accessible! }
+  describe '#remove_attr_accessible_and_protected!' do
+    subject { described_class.new(code).remove_attr_accessible_and_protected! }
 
     shared_examples_for 'code should not have attr_accessible' do
       it do

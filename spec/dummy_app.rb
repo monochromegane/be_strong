@@ -11,14 +11,14 @@ module DummyApp
 end
 DummyApp::Application.initialize!
 
-class NoAttrAccessible < ActiveRecord::Base
-end
-
 class Author < ActiveRecord::Base
   attr_accessible :name, :age
 end
 
-class CreateAuthors < ActiveRecord::Migration
+class NoAttrAccessible < ActiveRecord::Base
+end
+
+class CreateTables < ActiveRecord::Migration
   def self.up
     create_table(:authors) do |t|
       t.string :name

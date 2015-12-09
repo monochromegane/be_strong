@@ -19,7 +19,7 @@ describe BeStrong::StrongParameterMethods do
         it do
           is_expected.to eq(<<-'EOS'.strip_heredoc)
           def no_attr_accessible_params
-            params.require(:no_attr_accessible)
+            params.require(:no_attr_accessible).permit(:column1)
           end
           EOS
         end
