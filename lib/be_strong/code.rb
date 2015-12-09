@@ -1,5 +1,7 @@
 module BeStrong
   class Code
+    include Comparable
+
     REG_MASS_ASSIGNMENT_METHOD = /(new|build|build_.*|update|update!|assign_attributes|update_attributes|update_attributes!)([\( )])params\[:(\w*)\]/
 
     def initialize(code)
@@ -15,7 +17,7 @@ module BeStrong
         "#{$1}#{$2}#{$3}_params"
       end
 
-      return code if models.size.zero?
+      return self if models.size.zero?
 
       # add private section
       add_private!
@@ -32,27 +34,30 @@ module BeStrong
         end
       end
 
-      code
+      self
     end
 
     def add_private!
-      if code.include?('private')
-        code
-      else
+      unless code.include?('private')
         code.sub!(/^end/) do
           "\n  private\nend"
         end
       end
+      self
     end
 
     def remove_attr_accessible!
       code.gsub!(/( *attr_accessible\(.*?\)$)/m, '')
       code.gsub!(/( *attr_accessible.+?[^,]$)/m, '')
-      code
+      self
     end
 
     def changed?
       code != @original
+    end
+
+    def <=>(other)
+      code <=> other
     end
 
     private
