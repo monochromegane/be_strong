@@ -5,7 +5,10 @@ module BeStrong
     end
 
     def run(args)
-      Converter.convert
+      result = Converter.convert
+      result[:applied].each{|file| puts "Apply strong parameter: #{file}"}
+      result[:removed].each{|file| puts "Remove attr_[accessible|protected]: #{file}"}
+      result
     end
   end
 end
