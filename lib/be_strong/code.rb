@@ -56,6 +56,10 @@ module BeStrong
       code != @original
     end
 
+    def to_str
+      code
+    end
+
     def <=>(other)
       code <=> other
     end

@@ -15,7 +15,7 @@ module BeStrong
         code = Code.new(buf).apply_strong_parameter!
         return false unless code.changed?
 
-        File.open(file, 'w'){|f| f.puts(code)}
+        File.open(file, 'w'){|f| f.puts(code.to_str)}
         true
       end
     end
