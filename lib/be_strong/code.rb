@@ -3,7 +3,8 @@ module BeStrong
     REG_MASS_ASSIGNMENT_METHOD = /(new|build|build_.*|update|update!|assign_attributes|update_attributes|update_attributes!)([\( )])params\[:(\w*)\]/
 
     def initialize(code)
-      @code = code
+      @code     = code
+      @original = code.dup
     end
 
     def apply_strong_parameter!
@@ -48,6 +49,10 @@ module BeStrong
       code.gsub!(/( *attr_accessible\(.*?\)$)/m, '')
       code.gsub!(/( *attr_accessible.+?[^,]$)/m, '')
       code
+    end
+
+    def changed?
+      code != @original
     end
 
     private
