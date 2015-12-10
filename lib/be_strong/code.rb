@@ -53,7 +53,7 @@ module BeStrong
     def remove_attr_accessible_and_protected!
       %w(accessible protected).each do |name|
         code.gsub!(/( *attr_#{name}\(.*?\)$)/m, '')
-        code.gsub!(/( *attr_#{name}.+?[^,]$)/m, '')
+        code.gsub!(/( *attr_#{name}.+?[^,\\]$)/m, '')
       end
       self
     end
