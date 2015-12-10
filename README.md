@@ -1,4 +1,4 @@
-# BeStrong
+# BeStrong [![Build Status](https://travis-ci.org/monochromegane/be_strong.svg?branch=master)](https://travis-ci.org/monochromegane/be_strong)
 
 BeStrong is a tool for converting your `attr_accessible` and `attr_protected` to **strong parameter** method.
 
@@ -62,7 +62,7 @@ gem 'be_strong'
 
 ```sh
 $ cd your-project
-$ be_strong
+$ bundle exec rake be_strong:convert
 ```
 
 ## Development
