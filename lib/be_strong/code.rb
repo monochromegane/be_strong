@@ -2,7 +2,7 @@ module BeStrong
   class Code
     include Comparable
 
-    REG_MASS_ASSIGNMENT_METHOD = /(new|build|build_.*|update|update!|assign_attributes|update_attributes|update_attributes!)([\( )])params\[:(\w*)\]/
+    REG_MASS_ASSIGNMENT_METHOD = /((new|build|build_.*|update|update!|assign_attributes|update_attributes|update_attributes!)([\( )])params\[:(\w*)\])/
 
     def initialize(code)
       @code     = code
@@ -13,8 +13,12 @@ module BeStrong
       # replace params[:model] to model_params
       models = []
       code.gsub!(REG_MASS_ASSIGNMENT_METHOD) do
-        models << $3
-        "#{$1}#{$2}#{$3}_params"
+        if StrongParameterMethods.method_for($4)
+          models << $4
+          "#{$2}#{$3}#{$4}_params"
+        else
+          $1
+        end
       end
 
       return self if models.size.zero?
