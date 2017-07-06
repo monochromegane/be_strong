@@ -20,8 +20,8 @@ module BeStrong
       end
 
       def accessible_attributes
-        accssible = @klass.accessible_attributes
-        return accssible if accssible.size.nonzero?
+        accessible = @klass.accessible_attributes
+        return accessible if accessible.size.nonzero?
 
         @klass.attribute_names - @klass.protected_attributes.to_a
       end
