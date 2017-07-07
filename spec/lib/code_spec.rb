@@ -145,7 +145,7 @@ describe BeStrong::Code do
   describe '#add_private!' do
     subject { described_class.new(code).add_private! }
 
-    context 'when code dose not have private' do
+    context 'when code lacks private' do
       let(:code) do
         <<-'EOS'.strip_heredoc
           class Hoge
@@ -166,7 +166,7 @@ describe BeStrong::Code do
       let(:code) do
         <<-'EOS'.strip_heredoc
           class Hoge
-            private
+              private
           end
         EOS
       end
