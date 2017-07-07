@@ -3,7 +3,7 @@ require 'spec_helper'
 describe BeStrong::Code do
 
   describe '#apply_strong_parameter!' do
-    subject { described_class.new(code).apply_strong_parameter! }
+    subject { described_class.new(code).apply_strong_parameter!.to_s }
 
     context 'when code has mass assignment methods with params' do
       let(:code) do
@@ -75,7 +75,7 @@ describe BeStrong::Code do
   end
 
   describe '#remove_attr_accessible_and_protected!' do
-    subject { described_class.new(code).remove_attr_accessible_and_protected! }
+    subject { described_class.new(code).remove_attr_accessible_and_protected!.to_s }
 
     shared_examples_for 'code should not have attr_accessible' do
       it do

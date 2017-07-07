@@ -61,7 +61,7 @@ module BeStrong
       code != @original
     end
 
-    def to_str
+    def to_s
       code
     end
 
