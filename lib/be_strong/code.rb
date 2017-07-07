@@ -2,7 +2,7 @@ module BeStrong
   class Code
     include Comparable
 
-    REG_MASS_ASSIGNMENT_METHOD = /((new|build|build_.*|update|update!|assign_attributes|update_attributes|update_attributes!)([\( )])params\[:(\w*)\])/
+    REG_MASS_ASSIGNMENT_METHOD = /((new|build|build_.*|update|update!|assign_attributes|update_attributes|update_attributes!)([\( )])params\[:(\w*)\]([\( )]))/
 
     def initialize(code)
       @code     = code
@@ -15,7 +15,7 @@ module BeStrong
       code.gsub!(REG_MASS_ASSIGNMENT_METHOD) do
         if StrongParameterMethods.method_for($4)
           models << $4
-          "#{$2}#{$3}#{$4}_params"
+          "#{$2}#{$3}#{$4}_params#{$5}"
         else
           $1
         end
@@ -31,10 +31,10 @@ module BeStrong
         method = StrongParameterMethods.method_for(model)
         next unless method
 
-        next if code.include?("def #{model}_params")
+        next if code =~ /\bdef #{model}_params\b/
 
-        code.sub!(/^  private$/) do
-          "  private\n\n#{method.gsub(/^/, '  ').chomp}"
+        code.sub!(/\bprivate\b/) do
+          "private\n\n#{method.gsub(/^/, '  ').chomp}"
         end
       end
 
@@ -42,12 +42,11 @@ module BeStrong
     end
 
     def add_private!
-      unless code.include?('private')
-        code.sub!(/^end/) do
-          "\n  private\nend"
-        end
+      return code if code =~ /\bprivate\b/
+      code.sub!(/\bend\s*\z/) do
+        "\n  private\nend\n"
       end
-      self
+      code
     end
 
     def remove_attr_accessible_and_protected!
