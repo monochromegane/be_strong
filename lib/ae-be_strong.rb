@@ -1,0 +1,1 @@
+require "be_strong"
