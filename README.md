@@ -1,6 +1,9 @@
-# BeStrong [![Build Status](https://travis-ci.org/monochromegane/be_strong.svg?branch=master)](https://travis-ci.org/monochromegane/be_strong)
+# BeStrong [![Build Status](https://travis-ci.org/appfolio/be_strong.svg?branch=appfolio)](https://travis-ci.org/appfolio/be_strong)
 
 BeStrong is a tool for converting your `attr_accessible` and `attr_protected` to **strong parameter** method.
+This is useful if you are upgrading a large Rails app.
+
++This is a bug fix fork of the original [be_strong](https://github.com/monochromegane/be_strong) gem by [monochromegane](https://github.com/monochromegane).
 
 ## Examples
 
@@ -47,15 +50,15 @@ end
 
 - Generate strong parameter method from model.
 - Apply strong parameter method to controller.
-- Remove attr_accessible method from model.
-- Remove attr_protected method from model.
+- Remove `attr_accessible` method from model.
+- Remove `attr_protected` method from model.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'be_strong'
+gem 'ae-be_strong'
 ```
 
 ## Usage
@@ -73,8 +76,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/monochromegane/be_strong. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
-
+Bug reports and pull requests are welcome on [GitHub](https://github.com/appfolio/be_strong).
 
 ## License
 
