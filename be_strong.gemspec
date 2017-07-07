@@ -4,14 +4,14 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'be_strong/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "be_strong"
+  spec.name          = "ae-be_strong"
   spec.version       = BeStrong::VERSION
-  spec.authors       = ["monochromegane"]
-  spec.email         = ["dev.kuro.obi@gmail.com"]
+  spec.authors       = ["AppFolio"]
+  spec.email         = ["dev@appfolio.com"]
 
   spec.summary       = %q{Strong parameter converter.}
   spec.description   = %q{Strong parameter converter.}
-  spec.homepage      = "https://github.com/monochromegane/be_strong"
+  spec.homepage      = "https://github.com/appfolio/be_strong"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
